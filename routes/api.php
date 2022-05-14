@@ -9,6 +9,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\DenemeController;
 use App\Http\Controllers\OptikFormController;
 use App\Http\Controllers\SonucController;
+use App\Http\Controllers\KurumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:sanctum','admin'])->grou
   Route::post('/create/period', [PeriodController::class, 'store']);
   Route::post('/update/period', [PeriodController::class, 'update']);
   Route::post('/delete/period', [PeriodController::class, 'delete']);
+  Route::get('/kurumlar', [KurumController::class, 'kurumlar']);
+  Route::post('/delete/kurum', [KurumController::class, 'delete']);
+  Route::post('/change-kurum-status', [KurumController::class, 'change_status']);
+  Route::get('/denemeler', [AdminController::class, 'denemeler']);
+  Route::get('/denemeler/{period}', [AdminController::class, 'getActivePeriodDenemeler']);
 });
 
 /*

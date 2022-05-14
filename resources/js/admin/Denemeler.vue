@@ -7,9 +7,9 @@
 
           <div class="form-head d-flex align-items-center mb-sm-4 mb-3">
             <div class="mr-auto">
-              <h2 class="text-black font-w600">Bütün Denemeler</h2>
+              <h2 class="text-black font-w600">Admin - Bütün Denemeler</h2>
             </div>
-            <router-link to="/yeni-deneme" class="btn btn-primary">
+            <router-link to="#" class="btn btn-primary">
               <i class="flaticon-381-add-1 align-middle mr-2" style="position: relative; top: -1px;"></i> Yeni Deneme
             </router-link>
           </div>
@@ -83,17 +83,11 @@
                                               <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                             </button>
                                             <div class="dropdown-menu" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
-                                              <router-link :to="{path: '/deneme-analiz/' + deneme.id, query: { deneme_external: 'true' }}" v-if="getUser.id != deneme.user_id" class="dropdown-item" aria-expanded="false">
-                                                Denemeyi Uygula
-                                              </router-link>
-                                              <router-link :to="{path: '/deneme-analiz/' + deneme.id, query: { deneme_external: 'false' }}" v-else class="dropdown-item" aria-expanded="false">
-                                                Denemeyi Uygula
-                                              </router-link>
-                                              <router-link :to="{path: '/upload-answerkey/' + deneme.id}" class="dropdown-item" aria-expanded="false" v-if="getUser.id == deneme.user_id">
+                                              <router-link :to="{path: '/upload-answerkey/' + deneme.id}" class="dropdown-item" aria-expanded="false" >
                                                 Cevap Anahtarı Yükle
                                               </router-link>
-                                              <a class="dropdown-item" href="javascript:void(0)" v-if="getUser.id == deneme.user_id">Düzenle</a>
-                															<a class="dropdown-item" href="javascript:void(0)" v-if="getUser.id == deneme.user_id" @click="askDeleteModal(deneme)" data-toggle="modal" data-target="#deleteModal">Sil</a>
+                                              <a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+                															<a class="dropdown-item" href="javascript:void(0)" @click="askDeleteModal(deneme)" data-toggle="modal" data-target="#deleteModal">Sil</a>
                                             </div>
                                           </div>
                                         </td>
@@ -207,8 +201,8 @@
       },
       computed: {
         ...mapGetters([
-          'getToken',
-          'getUser'
+          'getAdminToken',
+          'getAdmin',
         ])
       },
       methods: {
@@ -217,7 +211,7 @@
           this.loader = true
           if (!this.period_manuel_selection && !this.is_search) { // period elle seçilmemiş ise ve arama yoksa
             console.log('getDenemeler - 1');
-            axios.get(`/api/denemeler?page=${this.page}`)
+            axios.get(`/api/admin/denemeler?page=${this.page}`)
             .then(response => {
               this.denemeler = response.data
               this.total = this.denemeler.total
@@ -227,7 +221,7 @@
             .catch(error => { console.log(error); this.loader = false; })
           } else if (this.is_search) { // arama varsa
             // console.log('getDenemeler - 2');
-            axios.get(`/api/denemeler/${this.selectedPeriod}?page=${this.page}&q=${this.q}`)
+            axios.get(`/api/admin/denemeler/${this.selectedPeriod}?page=${this.page}&q=${this.q}`)
             .then(response => {
               console.log(this.q.length);
               this.denemeler = response.data
@@ -239,7 +233,7 @@
             .catch(error => { console.log(error); this.loader = false; })
           } else { // select-option period elle seçilirse
             console.log('getDenemeler - 3');
-            axios.get(`/api/denemeler/${this.period}?page=${this.page}`)
+            axios.get(`/api/admin/denemeler/${this.period}?page=${this.page}`)
             .then(response => {
               this.denemeler = response.data
               this.total = this.denemeler.total
@@ -332,24 +326,6 @@
             link.click()
           });
         },
-        async downloadAnswerKey (deneme_id, deneme_name) {
-          axios.get('/api/download/answerkey/'+deneme_id+'/'+this.getUser.id, {
-            responseType: "blob",
-          })
-          .then(response => {
-             const url = window.URL.createObjectURL(new Blob([response.data]));
-             const link = document.createElement('a');
-             link.href = url;
-             link.setAttribute('download', 'CEVAP ANAHTARI - '+deneme_name+'.pdf');
-             document.body.appendChild(link);
-             link.click();
-          })
-          .catch(error => {
-            // this.toast.error(error.response.data.errors.optik_form_name[0]);
-            this.toast.error(error.response.data.errors);
-            this.loader = false
-          })
-        }
       },
       async mounted(){
         this.getPeriods();

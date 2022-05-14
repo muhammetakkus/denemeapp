@@ -26,6 +26,7 @@ import AdminStudent from './admin/Student.vue'
 import Period from './admin/Period.vue'
 import CreatePeriod from './admin/CreatePeriod.vue'
 import Kurumlar from './admin/Kurumlar.vue'
+import Denemeler from './admin/Denemeler.vue'
 
 const routes = [
   {
@@ -154,6 +155,12 @@ const routes = [
         path: 'create-period',
         name: 'CreatePeriod',
         component: CreatePeriod,
+        meta: {requiresAdminAuth: true}
+      },
+      {
+        path: 'denemeler',
+        name: 'Denemeler',
+        component: Denemeler,
         meta: {requiresAdminAuth: true}
       },
       {

@@ -6,8 +6,8 @@
                 <!--Logo-->
                 <div id="logo">
                     <a href="index.html">
-                        <span class="logo-default">POLO</span>
-                        <span class="logo-dark">POLO</span>
+                        <span class="logo-default text-primary">DenemeApp</span>
+                        <span class="logo-dark">DenemeApp</span>
                     </a>
                 </div>
                 <!--End: Logo-->
@@ -24,8 +24,9 @@
                                 <li><router-link to="/">Anasayfa</router-link></li>
                                 <li><router-link to="/login">Giriş</router-link></li>
                                 <li><router-link to="/register">Kayıt</router-link></li>
-                                <li><router-link to="/admin/login">Admin Login</router-link></li>
-                                <li class="dropdown"><span class="dropdown-arrow"></span><a href="#">Features</a>
+                                <!-- <li><router-link to="/admin/login">Admin Login</router-link></li> -->
+
+                                <!-- <li class="dropdown"><span class="dropdown-arrow"></span><a href="#">Features</a>
                                     <ul class="dropdown-menu" style="">
                                         <li class="dropdown-submenu"><span class="dropdown-arrow"></span><a href="#">Sliders</a>
                                             <ul class="dropdown-menu" style="">
@@ -69,7 +70,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                     </div>

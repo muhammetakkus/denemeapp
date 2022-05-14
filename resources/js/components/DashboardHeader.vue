@@ -85,7 +85,7 @@
               </router-link>
             </li>
 
-            <li>
+            <!-- <li>
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="flaticon-381-spotlight"></i>
                 <span class="nav-text">Sınıf & Öğrenci</span>
@@ -94,7 +94,7 @@
                 <li><router-link to="/admin/classes">Sınıflar</router-link></li>
                 <li><router-link to="/admin/students">Öğrenciler</router-link></li>
               </ul>
-            </li>
+            </li> -->
 
             <li>
               <router-link to="/admin/periods" class="ai-icon" aria-expanded="false">
@@ -103,10 +103,17 @@
               </router-link>
             </li>
 
-            <li>
+            <!-- <li>
               <router-link to="/admin/kurumlar" class="ai-icon" aria-expanded="false">
                 <i class="flaticon-381-home"></i>
                 <span class="nav-text">Kurumlar</span>
+              </router-link>
+            </li> -->
+
+            <li>
+              <router-link to="/admin/denemeler" class="ai-icon" aria-expanded="false">
+                <i class="flaticon-381-home"></i>
+                <span class="nav-text">Denemeler</span>
               </router-link>
             </li>
 

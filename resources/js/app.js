@@ -60,6 +60,8 @@ router.beforeEach((to, from, next) => {
         next() // make sure to always call next()!
     }
     window.scrollTo(0, 0)
+    $(".hamburger").removeClass("is-active");
+    $("#main-wrapper").removeClass("menu-toggle");
 })
 
 /**/
@@ -80,5 +82,6 @@ const options = {
 // import Pagination from 'v-pagination-3';
 /**/
 createApp(App).use(store).use(router).use(Toast, options).mount('#app')
+
 // createApp(App).component('pagination', Pagination).use(store).use(router).use(Toast, options).mount('#app')
 // createApp(App).use(store).use(router).mount('#app')

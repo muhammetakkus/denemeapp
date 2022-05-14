@@ -7,7 +7,7 @@
 
           <div class="form-head d-flex align-items-center mb-sm-4 mb-3">
             <div class="mr-auto">
-              <h2 class="text-black font-w600 mb-2">Periods</h2>
+              <h2 class="text-black font-w600 mb-2">Admin - Periods</h2>
               <p class="mb-0">Dönemler</p>
             </div>
             <router-link to="/admin/create-period" class="btn btn-primary">

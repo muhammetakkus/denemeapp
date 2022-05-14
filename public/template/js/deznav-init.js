@@ -1,5 +1,6 @@
 (function($) {
-	
+
+
 	function getUrlParams(dParam) {
 		var dPageURL = window.location.search.substring(1),
 			dURLVariables = dPageURL.split('&'),
@@ -14,7 +15,7 @@
 			}
 		}
 	}
-	
+
 	var direction =  getUrlParams('dir');
 	if(direction != 'rtl')
 	{direction = 'ltr'; }
@@ -32,11 +33,11 @@
 		containerLayout: "full",
 		direction: direction
 	};
-		
-	new dezSettings(dezSettingsOptions); 
+
+	new dezSettings(dezSettingsOptions);
 
 	jQuery(window).on('resize',function(){
-		new dezSettings(dezSettingsOptions); 
+		new dezSettings(dezSettingsOptions);
 	});
 
 })(jQuery);

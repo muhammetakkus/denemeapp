@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Deneme;
+use App\Models\Period;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -55,4 +57,40 @@ class AdminController extends Controller
       'message' => 'logged out'
     ];
   }
+
+  /**/
+  public function denemeler(Request $request)
+  {
+    $active_period = app('App\Http\Controllers\PeriodController')->getActivePeriod();
+
+    // Modeldeki relations'ı da beraber çekmek için with kullan
+    $allDenemeByPeriod = Deneme::with('answerkey')->where('period_id', $active_period->id)->where('is_primary', 1)->orderByDesc('created_at')->paginate(30);
+    return response()->json($allDenemeByPeriod);
+  }
+
+  public function getActivePeriodDenemeler($period, Request $request)
+  {
+    $period = Period::where('period', $period)->first();
+    $q = $request->q ?? null; // search text
+
+    if ($q && $q != '') {
+
+      $allDenemeByPeriod = Deneme::with('answerkey')
+      ->where('period_id', $period->id)
+      ->where([
+        ['is_primary', 1],
+      ])
+      ->where('deneme_name', 'LIKE', "%{$q}%")
+      // ->orWhere('deneme_type', 'LIKE', "%{$q}%") // orWhere devreye girince diğer where parametreleri yokmuş gibi arama yapıyor
+      ->orderByDesc('created_at')
+      ->paginate(30);
+      return response()->json($allDenemeByPeriod);
+
+    } else {
+      // Modeldeki relations'ı da beraber çekmek için with kullan
+      $allDenemeByPeriod = Deneme::with('answerkey')->where('period_id', $period->id)->where('is_primary', 1)->orderByDesc('created_at')->paginate(30);
+      return response()->json($allDenemeByPeriod);
+    }
+  }
+
 }
