@@ -5,7 +5,7 @@
             <div class="container">
                 <!--Logo-->
                 <div id="logo">
-                    <a href="index.html">
+                    <a href="#">
                         <span class="logo-default text-primary">DenemeApp</span>
                         <span class="logo-dark">DenemeApp</span>
                     </a>
